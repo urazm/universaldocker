@@ -1,31 +1,38 @@
-FROM ubuntu:latest
+FROM quay.io/school21/alpine:3.16
 
-RUN apt-get update
+RUN apk update && apk upgrade
 
-# tools
-RUN apt-get install -y \
+# Установка пакетов с помощью apk
+RUN apk add --no-cache \
     neofetch \
     zsh \
     curl
 
-# some developers tools
-RUN apt-get install -y \
+RUN apk --no-cache --upgrade add \
     git \
+    git-lfs \
+    curl \
+    jq \
+    bash \
+    build-base \
     python3 \
     valgrind \
     cppcheck \
-    check \
-    g++ \
-    make \
-    cmake \
-    clang \
-    clang-format
+    alpine-sdk \
+    pcre-dev \
+    clang-extra-tools \
+    check check-dev
 
-# zsh config
-RUN curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
-RUN echo clear >> ~/.zshrc
-RUN echo neofetch >> ~/.zshrc
-RUN echo "alias sh='bash'" >> ~/.zshrc
+
+# Установка Powerlevel10k
+RUN git clone --depth=1 https://github.com/romkatv/powerlevel10k.git \
+&& apk add zsh zsh-theme-powerlevel10k \
+&& mkdir -p ~/.local/share/zsh/plugins \
+&& ln -s /usr/share/zsh/plugins/powerlevel10k ~/.local/share/zsh/plugins/
+
 COPY . /project
-
 WORKDIR /project
+
+
+
+

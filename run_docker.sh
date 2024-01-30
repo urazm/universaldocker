@@ -1,3 +1,4 @@
 #!/bin/bash
 
-docker rmi -f winkelstein_docker && docker build --tag winkelstein_docker . && docker run -it winkelstein_docker zsh
+docker rmi -f guerenla_docker && docker build --tag guerenla_docker . && docker run -it guerenla_docker zsh
+
