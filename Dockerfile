@@ -35,7 +35,8 @@ WORKDIR /project
 
 RUN cd src \
 && make test \
-&& valgrind --tool=memcheck --leak-check=yes  ./test
+
+CMD ["valgrind", "--tool=memcheck", "--leak-check=full", "./test"]
 
 
 
