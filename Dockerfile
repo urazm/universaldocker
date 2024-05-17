@@ -33,11 +33,7 @@ RUN git clone --depth=1 https://github.com/romkatv/powerlevel10k.git \
 COPY . /project
 WORKDIR /project
 
-RUN cd src \
-&& make test \
+RUN cd src && make test
 
 CMD ["valgrind", "--tool=memcheck", "--leak-check=full", "./test"]
-
-
-
 
