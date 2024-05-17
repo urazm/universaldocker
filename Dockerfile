@@ -31,9 +31,8 @@ RUN git clone --depth=1 https://github.com/romkatv/powerlevel10k.git \
 && ln -s /usr/share/zsh/plugins/powerlevel10k ~/.local/share/zsh/plugins/
 
 COPY . /project
-WORKDIR /project
+WORKDIR /project/src
 
-RUN cd src && make test
+RUN make test
 
-CMD ["valgrind", "--tool=memcheck", "--leak-check=full", "./test"]
-
+CMD valgrind --tool=memcheck" --leak-check=full ./test
