@@ -35,4 +35,4 @@ WORKDIR /project/src
 
 RUN make test
 
-CMD valgrind --tool=memcheck" --leak-check=full ./test
+CMD valgrind --tool=memcheck --leak-check=full ./test
